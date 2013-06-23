@@ -1,4 +1,9 @@
 /* CSS declarations go here */
-body {
+.container-narrow {
 	margin: 0 auto;
+	max-width: 600px;
+}
+
+#text-entry {
+	resize: none;
 }
