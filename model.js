@@ -1,4 +1,7 @@
-  // Javascript loaded both on server and client sides
+// Javascript loaded both on server and client sides
 
-  // Texts -- {text: String}
-  Texts = new Meteor.Collection("texts");
+// Games -- {number: int, name: string, description: string}
+Games = new Meteor.Collection("games");
+
+// Texts -- {text: string, game: game_id}
+Texts = new Meteor.Collection("texts");

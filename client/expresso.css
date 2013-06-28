@@ -7,3 +7,11 @@
 #text-entry {
 	resize: none;
 }
+
+#text-title {
+	margin: 0;
+}
+
+#text-save-status {
+	line-height: 4;
+}
