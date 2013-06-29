@@ -2,11 +2,12 @@
 
 // Publish collections
 Meteor.publish("texts", function () {
-  return Texts.find();
+  return Texts.find({userId: this.userId});
 });
 
 Meteor.publish("games", function () {
-  return Games.find();
+	maxGame = Meteor.users.findOne({_id: this.userId}).level;
+  return Games.find({number: {$lte: maxGame}});
 });
 
 Meteor.publish("userData", function () {
