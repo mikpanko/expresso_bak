@@ -22,7 +22,8 @@ Template.canvas.text = function () {
 Template.canvas.events({
   'keyup textarea#text-entry' : function () {
     // updated text entry
-    if ($("#text-entry").val() !== Texts.findOne({game: Session.get("currentGameNum")}).text) {
+    if ((!Texts.findOne({game: Session.get("currentGameNum")})) ||
+      ($("#text-entry").val() !== Texts.findOne({game: Session.get("currentGameNum")}).text)) {
       Session.set("saved", false);
       if (!Session.get("timerId")) {
         var timerId = Meteor.setTimeout(function () {
@@ -34,7 +35,6 @@ Template.canvas.events({
             Texts.update(Texts.findOne({game: Session.get("currentGameNum")})._id, {$set: {text: $("#text-entry").val()}});
           Session.set("timerId", 0);
           Session.set("saved", true);
-
         }, 3000);
         Session.set("timerId", timerId);
       }

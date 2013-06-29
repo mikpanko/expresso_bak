@@ -3,6 +3,10 @@
 
 // Subscriptions
 Deps.autorun(function () {
+
+  //Meteor.autosubscribe(function () {
+    Meteor.subscribe("userData");
+  //});
   
   Meteor.subscribe("games", function () {
     Session.set("maxGameNum", Games.find().count());
