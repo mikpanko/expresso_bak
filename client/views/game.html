@@ -1,0 +1,9 @@
+<template name="game">
+	<h2>{{game.number}}. {{game.name}}</h2>
+	<p>{{game.description}}</p>
+	{{#if activeGame}}
+		<button class="btn btn-primary to-canvas">Play!</button>
+	{{else}}
+		<button class="btn btn-info to-canvas">Canvas</button>
+	{{/if}}
+</template>
