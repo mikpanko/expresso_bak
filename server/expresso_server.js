@@ -17,5 +17,13 @@ Meteor.publish("userData", function () {
 // Customize user creation
 Accounts.onCreateUser( function(options, user) {
 	user.level = 1;
+	Texts.insert({
+		userId: user._id,
+		game: 1,
+		text: "",
+		active: true,
+		timeWritten: 0,
+		timeCreated: new Date().getTime()
+	});
 	return user;
 });
