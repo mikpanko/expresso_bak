@@ -49,5 +49,8 @@ Meteor.methods({
 		if (level <= Games.find().count())
 			Meteor.users.update({_id: this.userId}, {$inc: {level: 1}});
 		return true;
+	},
+	startedGame: function (gameNum) {
+		Texts.update({userId: this.userId, game: gameNum}, {$set: {timeWritten: new Date().getTime()}});
 	}
 });

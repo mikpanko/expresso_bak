@@ -33,5 +33,7 @@ Template.canvas.events({
         Session.set("timerId", timerId);
       }
     }
+    if (Texts.findOne({game: Session.get("currentGameNum")}).timeWritten === 0)
+      Meteor.call("startedGame", Session.get("currentGameNum"));
   }
 });
