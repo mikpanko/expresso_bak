@@ -7,6 +7,13 @@ Template.game.text = function () {
   return Texts.findOne({game: Session.get("currentGameNum")});
 };
 
+Template.game.emptyText = function () {
+	if (Texts.findOne({game: Session.get("currentGameNum")}))
+  	return (Texts.findOne({game: Session.get("currentGameNum")}).text === "");
+  else
+  	return 1;
+};
+
 Template.game.events({
   "click button.to-canvas" : function () {
     Meteor.Router.to("/canvas/" + Session.get("currentGameNum"));
