@@ -9,7 +9,7 @@ Template.game.text = function () {
 };
 
 Template.game.emptyText = function () {
-	if (Texts.findOne({game: Session.get("currentGameNum")}))
+  if (Texts.findOne({game: Session.get("currentGameNum")}))
   	return (Texts.findOne({game: Session.get("currentGameNum")}).text === "");
   else
   	return 1;
@@ -19,7 +19,7 @@ Template.game.rendered = function () {
 	$(".navbar-all").removeClass("active");
   if (Meteor.user() && (Session.get("currentGameNum") === Meteor.user().level))
     $("#navbar-todays-game").addClass("active");
-	$("button.disabled").tooltip({title: "you need to complete the game before proceeding"});
+	$("button.disabled").tooltip({title: "you need to play the game before completing it"});
 };
 
 Template.game.events({

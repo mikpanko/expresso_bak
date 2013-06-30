@@ -1,8 +1,8 @@
 // Playbook template handling
 
 Template.playbook.games = function () {
-	games = Games.find().fetch();
-	for (i=0; i<games.length; i++)
+	var games = Games.find().fetch();
+	for (var i=0; i<games.length; i++)
 		games[i].active = Texts.findOne({game: i+1}).active;
   return games;
 };

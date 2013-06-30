@@ -7,7 +7,7 @@ Deps.autorun(function () {
     Meteor.subscribe("userData");
   });
   
-  //var level;
+  var level;
   if (Meteor.user())
     level = Meteor.user().level;
   else
