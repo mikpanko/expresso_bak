@@ -14,6 +14,10 @@ Template.game.emptyText = function () {
   	return 1;
 };
 
+Template.game.rendered = function () {
+	$("button.disabled").tooltip({title: "you need to complete the game before proceeding"});
+};
+
 Template.game.events({
   "click button.to-canvas" : function () {
     Meteor.Router.to("/canvas/" + Session.get("currentGameNum"));
