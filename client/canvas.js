@@ -1,4 +1,5 @@
 // Canvas template handling
+
 Template.canvas.game = function () {
   return Games.findOne({number: Session.get("currentGameNum")});
 };
@@ -9,6 +10,12 @@ Template.canvas.text = function () {
 
 Template.canvas.saved = function () {
   return Session.get("saved");
+};
+
+Template.canvas.rendered = function () {
+  $(".navbar-all").removeClass("active");
+  if (Meteor.user() && (Session.get("currentGameNum") === Meteor.user().level))
+    $("#navbar-todays-game").addClass("active");
 };
 
 Template.canvas.events({

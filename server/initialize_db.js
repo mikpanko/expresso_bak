@@ -1,4 +1,5 @@
-// if the database is empty on server start, create some sample data.
+// Create games collection, if the database is empty on server start
+
 Meteor.startup(function () {
 
   if (Games.find().count() === 0) {
