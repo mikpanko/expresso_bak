@@ -1,15 +1,19 @@
 // Client-side JavaScript, bundled and sent to client.
 
-
 // Subscriptions
 Deps.autorun(function () {
 
-  //Meteor.autosubscribe(function () {
+  Meteor.autosubscribe(function () {
     Meteor.subscribe("userData");
-  //});
+  });
   
-  Meteor.subscribe("games", function () {
-    Session.set("maxGameNum", Games.find().count());
+  //var level;
+  if (Meteor.user())
+    level = Meteor.user().level;
+  else
+    level = 0;
+  Meteor.subscribe("games", level, function () {
+    console.log(level + "***");
   });
   
   Meteor.subscribe("texts", function () {

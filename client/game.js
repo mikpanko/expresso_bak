@@ -3,12 +3,17 @@ Template.game.game = function () {
   return Games.findOne({number: Session.get("currentGameNum")});
 };
 
-Template.game.activeGame = function () {
-  return (Session.get("currentGameNum") === Session.get("maxGameNum"));
+Template.game.text = function () {
+  return Texts.findOne({game: Session.get("currentGameNum")});
 };
 
 Template.game.events({
-  'click button.to-canvas' : function () {
+  "click button.to-canvas" : function () {
     Meteor.Router.to("/canvas/" + Session.get("currentGameNum"));
+  },
+
+  "click button#complete" : function () {
+    Meteor.call("completeGame", Session.get("currentGameNum"));
+    Meteor.Router.to("/game/" + Session.get("currentGameNum"));
   }
 });

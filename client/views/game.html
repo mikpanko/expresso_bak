@@ -1,9 +1,14 @@
 <template name="game">
-	<h2>{{game.number}}. {{game.name}}</h2>
-	<p>{{game.description}}</p>
-	{{#if activeGame}}
-		<button class="btn btn-primary to-canvas">Play!</button>
+	{{#if currentUser}}
+		<h2>{{game.number}}. {{game.name}}</h2>
+		<p>{{game.description}}</p>
+		{{#if text.active}}
+			<button class="btn btn-primary to-canvas">Play!</button>
+			<button class="btn btn-inverse" id="complete">Complete</button>
+		{{else}}
+			<button class="btn btn-info to-canvas">Canvas</button>
+		{{/if}}
 	{{else}}
-		<button class="btn btn-info to-canvas">Canvas</button>
+		<p>You need to log in to play.</p>
 	{{/if}}
 </template>

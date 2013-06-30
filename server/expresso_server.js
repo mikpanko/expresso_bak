@@ -5,9 +5,12 @@ Meteor.publish("texts", function () {
   return Texts.find({userId: this.userId});
 });
 
-Meteor.publish("games", function () {
-	maxGame = Meteor.users.findOne({_id: this.userId}).level;
-  return Games.find({number: {$lte: maxGame}});
+Meteor.publish("games", function (level) {
+	if (this.userId) {
+  	return Games.find({number: {$lte: level}});
+  }
+  else
+  	return null;
 });
 
 Meteor.publish("userData", function () {
@@ -27,4 +30,24 @@ Accounts.onCreateUser( function(options, user) {
 		timeCreated: new Date().getTime()
 	});
 	return user;
+});
+
+
+// Handle calls
+Meteor.methods({
+	completeGame: function (gameNum) {
+		Texts.update({userId: this.userId, game: gameNum}, {$set: {active: false}});
+		Texts.insert({
+			userId: this.userId,
+			game: gameNum+1,
+			text: "",
+			active: true,
+			timeWritten: 0,
+			timeCreated: new Date().getTime()
+		});
+		level = Meteor.user().level;
+		if (level <= Games.find().count())
+			Meteor.users.update({_id: this.userId}, {$inc: {level: 1}});
+		return true;
+	}
 });

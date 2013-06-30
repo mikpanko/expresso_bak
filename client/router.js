@@ -5,7 +5,8 @@ Meteor.Router.add({
   }},
 
   "/game": { to: "game", and: function() {
-    Session.set("currentGameNum", Session.get("maxGameNum"));
+    if (Meteor.user())
+      Session.set("currentGameNum", Math.min(Meteor.user().level, Games.find().count()));
     $(".navbar-all").removeClass("active");
     $("#navbar-todays-game").addClass("active");
   }},
@@ -18,14 +19,14 @@ Meteor.Router.add({
   "/game/:id": { to: "game", and: function(id) {
     Session.set("currentGameNum", parseInt(id));
     $(".navbar-all").removeClass("active");
-    if (Session.get("currentGameNum") === Session.get("maxGameNum"))
+    if (Meteor.user() && (Session.get("currentGameNum") === Meteor.user().level))
       $("#navbar-todays-game").addClass("active");
   }},
 
   "/canvas/:id": { to: "canvas", and: function(id) {
     Session.set("currentGameNum", parseInt(id));
     $(".navbar-all").removeClass("active");
-    if (Session.get("currentGameNum") === Session.get("maxGameNum"))
+    if (Meteor.user() && (Session.get("currentGameNum") === Meteor.user().level))
       $("#navbar-todays-game").addClass("active");
   }}
 });
