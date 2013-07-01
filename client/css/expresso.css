@@ -19,3 +19,8 @@
 .used-link {
 	color: #994C00;
 }
+
+#reset-password-modal{
+	width: 250px;
+	margin-left: -125px;
+}

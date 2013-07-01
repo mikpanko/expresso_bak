@@ -26,7 +26,6 @@ Deps.autorun(function () {
 
 });
 
-
 // Startup
 Meteor.startup(function () {
 

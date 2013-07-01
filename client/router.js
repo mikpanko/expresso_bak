@@ -16,5 +16,6 @@ Meteor.Router.add({
 
   "/canvas/:id": { to: "canvas", and: function(id) {
     Session.set("currentGameNum", parseInt(id));
-  }}
+  }},
+
 });
