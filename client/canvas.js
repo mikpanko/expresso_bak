@@ -19,6 +19,7 @@ Template.canvas.rendered = function () {
 };
 
 Template.canvas.events({
+
   'keyup textarea#text-entry' : function () {
     // updated text entry
     if ($("#text-entry").val() !== Texts.findOne({game: Session.get("currentGameNum")}).text) {
@@ -36,4 +37,5 @@ Template.canvas.events({
     if (Texts.findOne({game: Session.get("currentGameNum")}).timeWritten === 0)
       Meteor.call("startedGame", Session.get("currentGameNum"));
   }
+  
 });

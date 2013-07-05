@@ -1,15 +1,19 @@
 <template name="canvas">
-	<div class="row-fluid">
-			<h2 class="span8" id="text-title">Canvas #{{game.number}}</h2>
+	{{#if currentUser}}
+		<div class="row-fluid">
+				<h2 class="span8" id="text-title">Canvas #{{game.number}}</h2>
+				{{#if text.active}}
+	  			<div class="span4 text-right" id="text-save-status">&nbsp;{{#if saved}}Saved{{/if}}</div>
+	  		{{/if}}
+		</div>
+		<div class="row-fluid">
 			{{#if text.active}}
-  			<div class="span4 text-right" id="text-save-status">&nbsp;{{#if saved}}Saved{{/if}}</div>
-  		{{/if}}
-	</div>
-	<div class="row-fluid">
-		{{#if text.active}}
-	  	<textarea rows="10" class="span12" id="text-entry" placeholder="Express yourself here...">{{text.text}}</textarea>
-	  {{else}}
-	  	<div class="span12 well well-large">{{text.text}}</div>
-	  {{/if}}
-	</div>
+		  	<textarea rows="10" class="span12" id="text-entry" placeholder="Express yourself here...">{{text.text}}</textarea>
+		  {{else}}
+		  	<div class="span12 well well-large">{{text.text}}</div>
+		  {{/if}}
+		</div>
+	{{else}}
+		<p>You need to log in to play.</p>
+	{{/if}}
 </template>

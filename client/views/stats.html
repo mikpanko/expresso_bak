@@ -1,0 +1,21 @@
+<template name="stats">
+	{{#if currentUser}}
+		<div class="row-fluid">
+				<h2 class="span12" id="text-title">Statistics #{{game.number}}</h2>
+		</div>
+		<div class="row-fluid">
+			<table class="table span12 table-striped table-bordered table-hover">
+				<tbody>
+					{{#with stats}}
+						<tr>
+							<td>Word count</td>
+							<td>{{wordCount}}</td>
+						</tr>
+		  		{{/with}}
+		  	</tbody>
+			</table>
+		</div>
+	{{else}}
+		<p>You need to log in to play.</p>
+	{{/if}}
+</template>

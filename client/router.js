@@ -18,4 +18,8 @@ Meteor.Router.add({
     Session.set("currentGameNum", parseInt(id));
   }},
 
+  "/stats/:id": { to: "stats", and: function(id) {
+    Session.set("currentGameNum", parseInt(id));
+  }}
+
 });

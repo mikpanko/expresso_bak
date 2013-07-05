@@ -35,6 +35,7 @@ Accounts.onCreateUser( function(options, user) {
 
 // Handle calls
 Meteor.methods({
+
 	completeGame: function (gameNum) {
 		Texts.update({userId: this.userId, game: gameNum}, {$set: {active: false}});
 		Texts.insert({
@@ -42,6 +43,7 @@ Meteor.methods({
 			game: gameNum+1,
 			text: "",
 			active: true,
+			analysisState: "none",
 			timeWritten: 0,
 			timeCreated: new Date().getTime()
 		});
@@ -50,7 +52,25 @@ Meteor.methods({
 			Meteor.users.update({_id: this.userId}, {$inc: {level: 1}});
 		return true;
 	},
+
 	startedGame: function (gameNum) {
 		Texts.update({userId: this.userId, game: gameNum}, {$set: {timeWritten: new Date().getTime()}});
-	}
+	},
+
+	analyzeText: function (gameNum) {
+		var userId = this.userId;
+		Texts.update({userId: this.userId, game: gameNum}, {$set: {analysisState: "sent"}});
+    Meteor.http.call("POST", "http://localhost:5000/analyze-text",
+      {data: {text: Texts.findOne({userId: userId, game: gameNum}).text}},
+      function (error, result) {
+        if (result.statusCode === 200) {
+        	console.log("received analyzed text");
+        	Texts.update({userId: userId, game: gameNum}, {$set: result.data});
+        	Texts.update({userId: userId, game: gameNum}, {$set: {analysisState: "complete"}});
+        }
+        console.log(Texts.findOne({userId: userId, game: gameNum}));
+        console.log(JSON.stringify(result));
+    });
+  }
+
 });
