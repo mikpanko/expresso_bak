@@ -60,7 +60,7 @@ Meteor.methods({
 	analyzeText: function (gameNum) {
 		var userId = this.userId;
 		Texts.update({userId: this.userId, game: gameNum}, {$set: {analysisState: "sent"}});
-    Meteor.http.call("POST", "http://localhost:5000/analyze-text",
+    Meteor.http.call("POST", "http://dry-inlet-8038.herokuapp.com/analyze-text",
       {data: {text: Texts.findOne({userId: userId, game: gameNum}).text}},
       function (error, result) {
         if (result.statusCode === 200) {
